@@ -23,7 +23,7 @@ class Embedly
 
   # get a single doc or multiple docs from the embedly API
   @_getFromEmbedlyApi: (url, done) ->
-    api_url = "http://api.embed.ly/1/oembed?key=#{@key}&url=#{encodeURIComponent(url)}"
+    api_url = "http://api.embed.ly/1/oembed?key=#{@key}&autoplay=true&url=#{encodeURIComponent(url)}"
     request api_url, (err, response, body) =>
       return done(err) if err
       # TODO check if the url which is returned
