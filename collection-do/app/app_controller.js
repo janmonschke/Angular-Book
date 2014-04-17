@@ -46,6 +46,10 @@ app.controller('AppController', ['$rootScope', '$scope',  'Collection', 'Item', 
         showItemsFromId();
     });
 
+    $rootScope.$watch('currentCollection', function(newv, oldv){
+      if(oldv != newv)
+        document.title = $rootScope.currentCollection.name;
+    });
 
     var initialize = function(){
       return $http({url: '/api/me', method: 'GET'}).then(function(user){
