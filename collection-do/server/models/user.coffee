@@ -18,9 +18,7 @@ class User extends Model
       done null, new @(res[0].value)
 
   @create: (data, done) ->
-    console.log 'user#create', data
     super data, (err, user) =>
-      console.log 'user#create 2', err, user
       return done(err, user) if err or not user
 
       # create a first collection
@@ -29,7 +27,6 @@ class User extends Model
       firstCollection.name = 'my first collection'
       firstCollection.slug = 'my-first-collection'
 
-      console.log 'user#create 3', firstCollection
       Collection.create firstCollection, done
 
   @createWithPassword: (data, done) ->
