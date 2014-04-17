@@ -13,7 +13,6 @@ class User extends Model
       done null, new @(res?[0]?.value)
 
   @findByServiceId: (serviceId, service, done) ->
-    console.log 'findByServiceId', serviceId, service
     @db().view 'users/usersByServiceId', {key: "#{service}-#{serviceId}"}, (err, res) =>
       return done(null, null) if err or res.length == 0
       done null, new @(res[0].value)

@@ -13,7 +13,6 @@ authenticate = (username, pw, done) ->
 
 authenticateSocial = (userid, username, service, profile, done) ->
   # Find the user by the given id...
-  console.log 'authenticateSocial', username, service
   User.findByServiceId userid, service, (err, user) ->
     # there was an error
     return done(err, null) if err
@@ -49,14 +48,11 @@ passport.use new TwitterStrategy
 serializeUser = (user, done) ->
   user = if user.values? then user.values else user
   id = if user.id? then user.id else user._id
-  console.log 'serializeUser', id
   done null, id
 
 # find the user by the id
 deserializeUser = (id, done) ->
-  console.log 'deserializeUser', id
   User.get id, (err, user) ->
-    console.log 'deserializeUser 2', err, user
     return done(null, null, null) if err or !user
     done null, new User user
 

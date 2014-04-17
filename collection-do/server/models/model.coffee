@@ -15,12 +15,10 @@ class Model
   #     deferred.resolve doc
 
   @instanceOrError: (done, err, values) =>
-    console.log 'model#instanceOrError', err, values
     return done(err) if err
     return done(null, values)
 
   @get: (id, done) ->
-    console.log 'model#get', id
     @db().get String(id), (err, values) => @instanceOrError done, err, values
 
   # edit: (id, doc) ->
@@ -46,7 +44,6 @@ class Model
       doc._rev = res.rev
       doc._id = res.id
 
-      console.log 'model#create', err, res, doc
       @instanceOrError done, err, doc
 
   @remove: (id, done) ->
