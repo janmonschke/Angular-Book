@@ -19,6 +19,7 @@ class User extends Model
 
   @create: (data, done) ->
     super data, (err, user) =>
+      console.log 'User#create', err, user
       return done(err, user) if err or not user
 
       # create a first collection
