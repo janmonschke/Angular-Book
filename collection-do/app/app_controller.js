@@ -1,12 +1,6 @@
 app.controller('AppController', ['$rootScope', '$scope',  'Collection', 'Item', '$http',
   function($rootScope, $scope, Collection, Item, $http){
 
-    // load the user's collections
-    $rootScope.user_collections = [];
-    Collection.allByUsername('thedeftone').then(function(collections){
-      $rootScope.user_collections = collections.data;
-    });
-
     $rootScope.currentCollection = null;
     var loadCollectionFromSlugAndUsername = function(slug, username){
       Collection.fromSlugAndUsername(slug, username).then(function(collection){
@@ -22,9 +16,9 @@ app.controller('AppController', ['$rootScope', '$scope',  'Collection', 'Item', 
 
     var showItemsFromSlugAndUsername = function(){
       console.log('TODO: get the actual username')
-      loadCollectionFromSlugAndUsername($rootScope.currentCollectionSlug, 'thedeftone');
+      loadCollectionFromSlugAndUsername($rootScope.currentCollectionSlug, $rootScope.user.username);
       // load the content of the current collection
-      Item.byUsernameAndCollectionSlug('thedeftone', $rootScope.currentCollectionSlug).then(function(items){
+      Item.byUsernameAndCollectionSlug($rootScope.user.username, $rootScope.currentCollectionSlug).then(function(items){
         $rootScope.showItems = items.data;
       });
     };
@@ -58,7 +52,16 @@ app.controller('AppController', ['$rootScope', '$scope',  'Collection', 'Item', 
         $rootScope.user = user.data;
       });
     };
-    
+
+    $rootScope.user_collections = [];
+    var loadUserCollections = function(){
+      return Collection.allByUsername($rootScope.user.username).then(function(collections){
+        $rootScope.user_collections = collections.data;
+      }).then(function(){
+        $rootScope.currentCollectionSlug = $rootScope.user_collections[0].slug;
+      });
+    };
+
     var startup = function(){
       if($rootScope.currentCollectionSlug){
         if($rootScope.currentCollectionSlug == 'inbox'){
@@ -71,5 +74,5 @@ app.controller('AppController', ['$rootScope', '$scope',  'Collection', 'Item', 
       }
     };
 
-    initialize().then(startup);
+    initialize().then(loadUserCollections).then(startup);
 }]);

@@ -9,5 +9,5 @@ app.config(['$httpProvider', function($httpProvider){
 
 
 app.run(function($rootScope){
-  $rootScope.currentCollectionSlug = 'test-collection';
+  
 })
