@@ -13,14 +13,18 @@ authenticate = (username, pw, done) ->
 
 authenticateSocial = (userid, username, service, profile, done) ->
   # Find the user by the given id...
+  console.log 'authenticateSocial', username, service
   User.findByServiceId userid, service, (err, user) ->
+    console.log 'findByServiceId', userid, err, user
     # there was an error
     return done(err, null) if err
     # found the user
     if user
+      console.log 'if user'
       done null, user
     else # no user, so let's create one
       # ...or create the user if it's not defined yet
+      console.log 'go to user#create'
       User.create
         username: username
         from_service: service
