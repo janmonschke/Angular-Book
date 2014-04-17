@@ -75,4 +75,4 @@ passport.use new FacebookStrategy
 , auth.authenticateFacebook
 ###
 
-exports.auth = passport
+module.exports.auth = passport
