@@ -20,6 +20,7 @@ class Model
     return done(null, values)
 
   @get: (id, done) ->
+    console.log 'model#get', id
     @db().get String(id), (err, values) => @instanceOrError done, err, values
 
   # edit: (id, doc) ->
