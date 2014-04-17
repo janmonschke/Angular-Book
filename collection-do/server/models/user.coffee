@@ -29,7 +29,9 @@ class User extends Model
       firstCollection.name = 'my first collection'
       firstCollection.slug = 'my-first-collection'
 
-      Collection.create firstCollection, done
+      Collection.create firstCollection, (err, collection) =>
+        return done(err, null) if err or not collection
+        done null, user
 
   @createWithPassword: (data, done) ->
     user = new @(data)
