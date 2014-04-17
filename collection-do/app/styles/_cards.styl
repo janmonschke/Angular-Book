@@ -1,0 +1,50 @@
+.card
+
+  &.video
+    display: block
+
+  &.link
+    img.preview
+      float left
+      margin: 0 10px 10px 0
+
+  .item-content
+    position relative
+
+    img.preview-image
+      width 310px
+
+    iframe
+      width 310px
+      height 240px
+
+    .text-preview
+      padding 10px
+
+  .item-description
+    a
+      text-decoration none
+      display block
+      width 290px
+      padding 10px 0 0 10px
+      margin 0 auto
+
+      h2
+        font-size 15px
+        font-family 'Georgia'
+        min-height 40px
+
+  .item-controls
+    opacity 0
+    transition opacity .2s ease-in
+    padding 0px 0 0 10px
+    margin-bottom 5px
+
+  &:hover
+    .item-controls
+      opacity 1
+
+.create-item
+
+  input[type=text]:disabled
+    background-color #ddd

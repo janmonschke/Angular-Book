@@ -1,0 +1,44 @@
+######################
+# OS generated files #
+######################
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+dump.rdb
+
+######################
+# Dependencies       #
+######################
+
+# node modules don't belong into the repository
+# use a package.json and 'npm install' instead
+node_modules
+
+######################
+# Generated Files    #
+######################
+
+public
+*.aux
+*.pdf
+*.log
+*.gz
+*.toc
+*.bbl
+*.blg
+*.out
+*.glo
+*.ist
+*.lof
+*.xdy
+*.fdb_latexmk
+*.auf
+
+######################
+# The rest           #
+######################
+
+collection-do/server/config.coffee

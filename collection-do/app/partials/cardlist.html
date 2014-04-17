@@ -1,0 +1,25 @@
+<div class="card-list-container">
+
+  <h1>{{ currentCollection.name }}</h1>
+
+  <form class="create-item" ng-submit="create()">
+    <input type="text" placeholder="Paste URL here" ng-model="newUrl" ng-disabled="loading" ng-class="{ loading: loading }" /><span ng-if="loading" class="icon-spin1 loading-indicator animate-spin"></span>
+  </form>
+
+  <div class="filter-buttons">
+    <span>Filter:</span>
+    <button ng-click="setFilter('link')" ng-class="{active: filter == 'link'}">Link</button>
+    <button ng-click="setFilter('video')" ng-class="{active: filter == 'video'}">Video</button>
+    <button ng-click="setFilter('rich')" ng-class="{active: filter == 'rich'}">Rich</button>
+    <button ng-click="setFilter('photo')" ng-class="{active: filter == 'photo'}">Photo</button>
+  </div>
+
+  <div id="collection-content">
+    <div class="content-list" masonry masonry-options="{ transitionDuration: 0, gutter: 15 }">
+      <div ng-repeat="item in filteredItems = (showItems | filter: cardFilter | orderBy:'-created_at')" class="card {{item.embedlyContent.type}} masonry-brick" card>
+      </div>
+      <p ng-hide="filteredItems.length">No cards!</p>
+    </div>
+  </div>
+
+</div>

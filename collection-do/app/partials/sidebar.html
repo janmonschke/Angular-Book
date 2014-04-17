@@ -1,0 +1,14 @@
+
+<div class="collections">
+  <div class="add-collection">
+    <form ng-submit="createNewCollection()">
+      <input type="text" placeholder="Add collection..." ng-model="newCollectionName" />
+    </form>
+  </div>
+
+  <ul>
+    <li ng-repeat="collection in collections track by collection._id">
+      <div editable-collection></div>
+    </li>
+  </ul>
+</div>

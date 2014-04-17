@@ -1,0 +1,75 @@
+.card-list-container
+  margin-left 40px
+  display inline-block
+  width 750px
+
+  input
+    display inline-block
+
+  .loading-indicator
+    margin-left 5px
+
+  h2
+    line-height 20px
+    font-size 17px
+
+  .filter-buttons, form
+    display inline-block
+
+  .filter-buttons
+    float right
+
+    button
+      border-radius 0
+      border 1px solid rgba(0, 0, 0, .15)
+      padding 7px
+      background white
+      margin 0
+
+      &:hover
+        border 1px solid rgba(0, 0, 0, .35)
+
+      &:focus
+        outline none
+
+      &.active
+        border-color #FC7D5E
+
+  .content-list
+    margin-bottom 0
+    width 1000px
+
+    .card
+      margin 0
+      margin-bottom 15px
+      border-bottom none
+      transition background-color .2s linear
+      width 310px
+      border 1px solid rgba(0, 0, 0, .15)
+      background-color white
+
+      &:hover
+        background-color rgba(0, 0, 0, .02)
+
+      .playContainer
+        position relative
+        text-align center
+        cursor pointer
+        color rgba(255,255,255,.4)
+        transition color .2s linear
+
+        &:hover
+          color rgba(255,255,255,.9)
+
+        .play-overlay
+          height 60px
+          font-size 60px
+          overflow auto
+          margin auto
+          position absolute
+          top 0
+          left 0
+          bottom 0
+          right 0
+          text-align center
+          text-shadow -1px 0 rgba(0,0,0,.05), 0 1px rgba(0,0,0,.05), 1px 0 rgba(0,0,0,.05), 0 -1px rgba(0,0,0,.05)

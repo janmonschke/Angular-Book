@@ -1,0 +1,19 @@
+<div class="item-content">
+  <div class="playContainer" ng-if="hasImagePreview()" ng-click="showPreview()">
+    <span class="icon-play-circled play-overlay"></span>
+    <img ng-src="{{ item.embedlyContent.thumbnail_url }}" class="preview-image" />
+  </div>
+
+  <p ng-if="hasTextPreview()" class="text-preview">{{ item.embedlyContent.description }}</p>
+</div>
+
+<div class="item-description">
+  <a href="{{ item.url }}">
+    <h2>{{ item.embedlyContent.title }}</h2>
+  </a>
+</div>
+
+<div class="item-controls">
+  <a ng-href="{{ item.url }}" target="_blank"><span class="icon-link-ext-alt"></span></a>
+  <a href ng-click="deleteCard()"><span class="icon-cancel-circled" ng-if="belongsToUser()"></span></a>
+</div>

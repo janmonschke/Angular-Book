@@ -1,0 +1,11 @@
+<div class="collection-row" ng-show="!editing">
+  <a href="" ng-click="changeCollection(collection._id)" >{{ collection.name }}</a>
+  <span class="icon-pencil-squared" ng-click="editing = true"></span>
+</div>
+<div class="collection-row-editing" ng-show="editing">
+  <form ng-submit="saveNewName()">
+    <input type="text" ng-model="collection.name" ng-disabled="saving" ng-keydown="keyDown($event)" />
+    <span class="icon-cancel-circled" ng-if="!saving" ng-click="deleteCollection()"></span>
+    <span ng-if="saving" class="icon-spin1 loading-indicator animate-spin"></span>
+  </form>
+</div>
