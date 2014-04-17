@@ -1,5 +1,5 @@
-app.controller('SidebarController', ['$rootScope', '$scope', 'Collection', 'Slug',
-  function($rootScope, $scope, Collection, Slug){
+app.controller('SidebarController', ['$rootScope', '$scope', '$location', 'Collection', 'Slug',
+  function($rootScope, $scope, $location, Collection, Slug){
 
     $scope.collections = [];
     $scope.newCollectionName = "";
@@ -10,6 +10,8 @@ app.controller('SidebarController', ['$rootScope', '$scope', 'Collection', 'Slug
 
     $scope.changeCollection = function(collectionId){
       $rootScope.currentCollectionId = collectionId;
+      var collection = _.findWhere($scope.collections, { _id: collectionId});
+      $location.path([$rootScope.user.username, collection.slug].join('/'), false);
     };
 
     $scope.createNewCollection = function(){
