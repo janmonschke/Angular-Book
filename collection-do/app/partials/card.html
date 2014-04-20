@@ -1,7 +1,7 @@
 <div class="item-content">
   <div class="playContainer" ng-if="hasImagePreview()" ng-click="showPreview()">
     <span class="icon-play-circled play-overlay"></span>
-    <img ng-src="{{ item.embedlyContent.thumbnail_url }}" class="preview-image" />
+    <img ng-src="{{ item.embedlyContent.thumbnail_url }}" class="preview-image" width="{{ baseWidth }}" height="{{ height() }}" />
   </div>
 
   <p ng-if="hasTextPreview()" class="text-preview">{{ item.embedlyContent.description }}</p>

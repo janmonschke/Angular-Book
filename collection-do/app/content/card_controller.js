@@ -24,4 +24,10 @@ app.controller('CardController', ['$rootScope', '$scope', 'Item',
       Item.destroy($rootScope.currentCollection._id, $scope.item._id);
     };
 
+    $scope.baseWidth = 310;
+    $scope.height = function(){
+      var ratio = $scope.item.embedlyContent.thumbnail_height/ $scope.item.embedlyContent.thumbnail_width;
+      return $scope.baseWidth * ratio;
+    };
+
 }]);
