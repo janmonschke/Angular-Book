@@ -16,7 +16,7 @@
 
   <div id="collection-content">
     <div class="content-list" masonry masonry-options="{ transitionDuration: 0, gutter: 15 }">
-      <div ng-repeat="item in filteredItems = (showItems | filter: cardFilter | orderBy:'-created_at')" class="card {{item.embedlyContent.type}} masonry-brick" card>
+      <div ng-repeat="item in filteredItems = (items | filter: cardFilter | orderBy:'-created_at')" class="card {{item.embedlyContent.type}} masonry-brick" card>
       </div>
       <p ng-hide="filteredItems.length">No cards!</p>
     </div>

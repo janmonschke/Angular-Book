@@ -10,8 +10,8 @@ class CollectionController extends Controller
   show: (req, res) =>
     user = req.user
     Collection.get req.params.collection_id, (err, collection) =>
-      return @['500'](req, res) if err
       return @['404'](req, res) if not collection
+      return @['500'](req, res) if err
       console.log 'TODO: check visibility and ownership for invisible collections'
       #return @['401'](req, res) unless user and user.values._id is collection.owner_id
       console.log collection
@@ -87,8 +87,8 @@ class CollectionController extends Controller
     collection_slug = req.params.collection_slug
 
     renderCollection = (err, collection) =>
-      return @['500'](req, res) if err
       return @['404'](req, res) if collection.length is 0
+      return @['500'](req, res) if err
       res.json collection[0].value
 
     # fast lane or not?
@@ -96,8 +96,8 @@ class CollectionController extends Controller
       Collection.findByUserIdAndSlug req.user.values._id, collection_slug, renderCollection
     else
       User.findByName username, (err, user) =>
-        return @['500'](req, res) if err
         return @['404'](req, res) if not user
+        return @['500'](req, res) if err
         Collection.findByUserIdAndSlug user.values._id, collection_slug, renderCollection
 
 module.exports = CollectionController

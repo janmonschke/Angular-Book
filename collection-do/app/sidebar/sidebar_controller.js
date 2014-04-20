@@ -1,12 +1,6 @@
-app.controller('SidebarController', ['$rootScope', '$scope', '$location', 'Collection', 'Slug',
-  function($rootScope, $scope, $location, Collection, Slug){
-
-    $scope.collections = [];
+app.controller('SidebarController', ['$rootScope', '$scope', '$location', 'Collection', 'Slug', 'User',
+  function($rootScope, $scope, $location, Collection, Slug, User){
     $scope.newCollectionName = "";
-
-    $rootScope.$watch('user_collections', function(){
-      $scope.collections = $rootScope.user_collections;
-    })
 
     $scope.changeCollection = function(collectionId){
       $rootScope.currentCollectionId = collectionId;
@@ -30,4 +24,9 @@ app.controller('SidebarController', ['$rootScope', '$scope', '$location', 'Colle
       })
     };
 
+    User.bySession().then(function(){
+      Collection.allByUsername($rootScope.user.username).then(function(collections){
+        $scope.collections = collections.data;
+      });  
+    });
 }]);

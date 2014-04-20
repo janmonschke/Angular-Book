@@ -24,6 +24,8 @@ html(lang='en', ng-app='app', ng-controller='AppController')
   body
 
     #content
-      div(sidebar)
-
-      div(card-list)
+      div(id="sidebar")
+        div(ui-view="sidebar")
+        div(sidebar)
+      
+      div(ui-view="content")

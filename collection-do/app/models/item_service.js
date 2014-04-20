@@ -6,10 +6,14 @@ app.factory('Item', ['$rootScope', '$http', 'BaseModel', function($rootScope, $h
       return this.hasRequestOrNewRequest(url, 'GET');
     },
 
+    currentItems: [],
     byUsernameAndCollectionSlug: function(username, collectionSlug){
       var url = "/api/user/" + username + "/collection/" + collectionSlug + "/items";
       
-      return this.hasRequestOrNewRequest(url, 'GET');
+      return this.hasRequestOrNewRequest(url, 'GET').then(function(response){
+        this.currentItems = response.data;
+        return response;
+      }.bind(this));
     },
 
     createFromUrlInCollection: function(contentUrl, collectionId){

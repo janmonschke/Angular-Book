@@ -17,9 +17,8 @@ app.controller('CardController', ['$rootScope', '$scope', 'Item',
 
     $scope.deleteCard = function(){
       // remove it from the visible items
-      $rootScope.showItems = _.reject($rootScope.showItems, function(item){
-        return item._id === $scope.item._id;
-      });
+      var index = _.indexOf($scope.items, $scope.item);
+      $scope.items.splice(index, 1);
 
       // make the backend request
       Item.destroy($rootScope.currentCollection._id, $scope.item._id);

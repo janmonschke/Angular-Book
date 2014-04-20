@@ -1,13 +1,12 @@
-app.controller('CardListController', ['$rootScope', '$scope', 'Item',
-  function($rootScope, $scope, Item){
-
+app.controller('CardListController', ['$rootScope', '$scope', '$stateParams', 'Item', 'Collection', 'User',
+  function($rootScope, $scope, $stateParams, Item, Collection, User){
     $scope.filter = "";
 
     $scope.create = function(){
       $scope.loading = true;
       Item.createFromUrlInCollection($scope.newUrl, $rootScope.currentCollection._id).then(function(result){
         $scope.newUrl = "";
-        $rootScope.showItems.unshift(result.data);
+        $scope.items.unshift(result.data);
         $scope.loading = false;
       });
     };
@@ -24,5 +23,14 @@ app.controller('CardListController', ['$rootScope', '$scope', 'Item',
       if($scope.filter == '') return true;
       return (card.embedlyContent.type == $scope.filter);
     };
+    
+    // load the content of the current collection
+    Item.byUsernameAndCollectionSlug($stateParams.username, $stateParams.collectionSlug).then(function(items){
+      $scope.items = items.data;
+    });
 
+    // load the current collection
+    Collection.fromSlugAndUsername($stateParams.collectionSlug, $stateParams.username).then(function(collection){
+      $rootScope.currentCollection = collection.data;
+    });
 }]);
