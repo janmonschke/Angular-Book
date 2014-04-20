@@ -32,5 +32,6 @@ app.controller('CardListController', ['$rootScope', '$scope', '$stateParams', 'I
     // load the current collection
     Collection.fromSlugAndUsername($stateParams.collectionSlug, $stateParams.username).then(function(collection){
       $rootScope.currentCollection = collection.data;
+      $rootScope.currentTitle = collection.data.name;
     });
 }]);
