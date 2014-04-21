@@ -6,7 +6,7 @@ Modern interactive web applications have a growing frontend code base and become
 
 This report will focus on another framework with a different approach. It will give an in-depth look into the framework AngularJS\footnote{\url{https://angularjs.org/}, last-checked on 21/04/2014} which is based on the MVVM pattern. It is also based on concepts like `dependency injection' and `separation of concerns' which are not common in other frameworks but which give developers the opportunity to write easily testable and highly reusable applications and components.
 
-AngularJS's basic concepts, its core principles will be explained in text and in two in-depth practical examples (\refchapter{part:xbmc} and \refchapter{part:collection}). \todo{Link to specific chapters and sections}
+AngularJS's basic concepts and its core principles will be explained in text and in two in-depth practical examples (\refchapter{part:xbmc} and \refchapter{part:collection}). \todo{Link to specific chapters and sections}
 
 \section{MVC and MVVM}
 \label{sec:mvcmvvm}
@@ -14,5 +14,17 @@ AngularJS's basic concepts, its core principles will be explained in text and in
 \begin{figure}[htb]
   \centerline{\includegraphics[width=0.6\linewidth]{images/MVC.pdf}}
   \caption[MVC]{MVC}
-  \label{fig:polling}
+  \label{fig:mvc}
 \end{figure}
+
+In order to understand the MVVM pattern, on which AngularJS is based, the MVC pattern needs to be explained in advance, because MVVM bases on MVC. MVC stands for ``Model View Controller'' and is a software design pattern which is widely used in many different applications. It consists of three different main parts:
+
+\textbf{The Model}, which represents the the application's state. Models take care of persisting, fetching and updating the state and encapsulate all these transactions in an API.
+
+\textbf{The View}, which is the visual representation of the data and an interface to trigger data changes.
+
+\textbf{The Controller}, which represents the connection between \textbf{Model} and \textbf{View}. It takes care of updating view state and interacts with the model.
+
+They way in which these components interact is strictly limited to the actions that are shown in \reffigure{fig:mvc}. The view never directly interacts with the model and vice versa. In this way, the entire model layer can be replaced by a completely different implementation and the view code would not need to be changed because the view only interacts with the controller. In a best case scenario, even the controller code would not require alterations if the same interface between it and the model would be used again. Basically, any of the three components can be replaced by another implementation and the other components would still work.
+
+Although the basic structure of MVC is well-defined, it is discussed whether the business logic should reside in the model layer or if it should reside in the controller layer. Frameworks often decide to have either ``fat models and skinny controllers'' (e.g. in Ruby on Rails) or to give controllers more responsibilities than just fetching and updating models.
