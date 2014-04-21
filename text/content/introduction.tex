@@ -4,12 +4,15 @@
 
 Modern interactive web applications have a growing frontend code base and become very complex. This makes them harder to maintain and to find suitable structures. In the past few years, several frameworks have been introduced to deal with the growing code base in a structured way. Many of these frameworks are based on structures derived from backend frameworks and their MVC structure (see \refchapter{sec:mvcmvvm}). BackboneJS\footnote{\url{https://backbonejs.org}, last-checked on 21/04/2014} for example is one of the most commonly used frameworks \cite{sanderson2012rich}. It structures applications into models, routers and views. Therefore it is similar to classic web frameworks such as Ruby on Rails\footnote{A ruby-based web framework, \url{http://rubyonrails.org/}, last checked on 24/04/2014} or Django\footnote{A python-based web framework, \url{https://www.djangoproject.com/}, last checked on 24/04/2014}. In addition to that, all components in BackboneJS applications are developed object-oriented and they are composed from the above described base components or components that are derived from them. This approach is somehow comparable to developing SWING\footnote{A Java-based GUI toolkit} applications, although it is much more flexible due to BackbonJS's lean structure and JavaScript's prototype model.
 
-This report will focus on another framework with a different approach. It will give an in-depth look into the framework AngularJS\footnote{\url{https://angularjs.org/}, last-checked on 21/04/2014} which is based on the MVVM pattern. It is also based on concepts like `dependency injection' and `separation of concerns' which are not common in other frameworks but which give developers the opportunity to write easily testable and highly reusable applications and components.
+This report will focus on another framework with a different approach. It will give an in-depth look into the framework AngularJS\footnote{\url{https://angularjs.org/}, last-checked on 21/04/2014} which is based on the MVVM pattern \cite{minar2012mvvm}. It is also based on concepts like `dependency injection' and `separation of concerns' which are not common in other frameworks but which give developers the opportunity to write easily testable and highly reusable applications and components.
 
 AngularJS's basic concepts and its core principles will be explained in text and in two in-depth practical examples (\refchapter{part:xbmc} and \refchapter{part:collection}). \todo{Link to specific chapters and sections}
 
 \section{MVC and MVVM}
 \label{sec:mvcmvvm}
+
+\subsection{MVC}
+\label{subsec:mvc}
 
 \begin{figure}[htb]
   \centerline{\includegraphics[width=0.6\linewidth]{images/MVC.pdf}}
@@ -28,3 +31,12 @@ In order to understand the MVVM pattern, on which AngularJS is based, the MVC pa
 They way in which these components interact is strictly limited to the actions that are shown in \reffigure{fig:mvc}. The view never directly interacts with the model and vice versa. In this way, the entire model layer can be replaced by a completely different implementation and the view code would not need to be changed because the view only interacts with the controller. In a best case scenario, even the controller code would not require alterations if the same interface between it and the model would be used again. Basically, any of the three components can be replaced by another implementation and the other components would still work.
 
 Although the basic structure of MVC is well-defined, it is discussed whether the business logic should reside in the model layer or if it should reside in the controller layer. Frameworks often decide to have either ``fat models and skinny controllers'' (e.g. in Ruby on Rails) or to give controllers more responsibilities than just fetching and updating models.
+
+\subsection{MVVM}
+\label{subsec:mvvm}
+
+\begin{figure}[htb]
+  \centerline{\includegraphics[width=0.6\linewidth]{images/MVVM.pdf}}
+  \caption[MVVM]{MVVM}
+  \label{fig:mvc}
+\end{figure}
