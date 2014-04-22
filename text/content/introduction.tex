@@ -42,3 +42,5 @@ Although the basic structure of MVC is well-defined, it is discussed whether the
 \end{figure}
 
 The MVVM pattern is an addition to the MVC pattern and stands for ``Model View ViewModel''. It has been first described by \cite{fowler04mvvm} and was called ``Presentation Model'' initially. Its idea is to add a ``ViewModel'' to the view layer which is another, logical, representation of the model in the backend. The ViewModel is capable of communicating to the data provider (in this case the ``Model'' \reffigure{fig:mvvm}) either directly or through a custom controller layer. The View in this concept often interacts with its ViewModel directly through a binding that takes care of updating the view whenever the model changes and that also updates the model whenever the view state changes.
+
+The advantage of this approach is that the ViewModel acts as an automatic ``translator'' of the model data and the view's visible data representation. Additionally, one ViewModel instance could be used by several (different and independent) View instances so that the state of a specific model is always consistent no matter which View is currently editing it.

@@ -33,6 +33,7 @@ public
 *.glo
 *.ist
 *.lof
+*.lol
 *.xdy
 *.fdb_latexmk
 *.auf
