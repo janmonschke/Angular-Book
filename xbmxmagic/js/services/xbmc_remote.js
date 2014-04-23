@@ -1,5 +1,5 @@
 app.factory('xbmcRemote', function($http, xbmcSettings) {
-  sendAction = function(action, extra) {
+  var sendAction = function(action, extra) {
     if (extra == null) {
       extra = {};
     }

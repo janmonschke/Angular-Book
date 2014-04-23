@@ -50,9 +50,26 @@ The GestureController detects and interprets the user's swipe gestures. For this
 
 \subsubsection{CommandsController}
 
+The CommandsController is similar to the GestureController and only acts as a connection between \code{xbmcRemote} and the user interface. Instead of using gestures, the buttons use \code{ng-click} to execute the actions. The buttons only act as shortcuts to functionalities that could also be executed by combining some gestures and navigating visually.
+
 \subsubsection{SettingsController}
+
+Before the remote control can be used, it is essential to add the network information for the desired XBMC media center. The SettingsController provides an easy form to type in all required details that are needed to connect to the server. It makes use of the values that are provided by the \code{xbmcSettings} service (see \refchapter{subsubsec:xbmcSettings}). Again, the controller only uses built-in directives (\code{ng-change} and \code{ng-model}, see \reflisting{lst:settings-controller}) and provides a simple \code{save} method that points to the \code{xbmcSettings} service.
+
+\begin{lstlisting}[language=HTML, caption=SettingsController bindings, label=lst:settings-controller]
+  <form ng-change="save()">
+    <input type="text" ng-model="settings.address"/>
+  </form>
+\end{lstlisting}
 
 \subsection{Services}
 
 \subsubsection{xbmcRemote}
 \label{subsubsec:xbmcRemote}
+
+The XBMC media center provides a JSON-RPC\footnote{\url{http://www.jsonrpc.org/specification}, last-checked on 23/04/2014} API\footnote{\url{http://wiki.xbmc.org/?title=JSON-RPC_API}, last-checked on 23/04/2014} which can be used to control the interface. It gives third-party applications complete control over the user interface and it provides access to metadata about the currently selected or the playing media stream. The \code{xbmcRemote} service provides a simple way to send actions to the media center by completely hiding the connection logic and providing a simplified API to the controllers that need to send actions. At its core, the service uses AngularJS's \code{\$http} service to prepare and to send messages. In addition, it uses the connection information, which is provided by the \code{xbmcSettings} service.
+
+\subsubsection{xbmcSettings}
+\label{subsubsec:xbmcSettings}
+
+The connection settings are saved using the device's \code{localStorage}, a simple key-value storage that is available in all targeted mobile web browsers\footnote{\url{http://caniuse.com/namevalue-storage}, last-checked on 23/04/2014}. Therefore, the \code{xbmcSettings} service acts as a central interaction point that automatically loads the configuration when the application starts. It furthermore provides an API to persist the current configuration which is used by the \code{SettingsController} when a form change is detected.
