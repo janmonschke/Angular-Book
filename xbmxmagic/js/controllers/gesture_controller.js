@@ -1,6 +1,6 @@
 app.controller('GestureController', ['$scope', 'xbmcRemote', function($scope, xbmcRemote){
   // select the letter for animation
-  var letter = angular.element('#letter');
+  var letter = angular.element(document.getElementById('letter'));
 
   // remove the glow class when animation is over
   letter[0].addEventListener('webkitAnimationEnd', function() {
@@ -9,8 +9,8 @@ app.controller('GestureController', ['$scope', 'xbmcRemote', function($scope, xb
   });
 
   // prepare elements
-  var gestureTarget = angular.element('#gesture-target');
-  var hammeredGestureTarget = Hammer(gestureTarget);
+  var gestureTarget = angular.element(document.getElementById('gesture-target'));
+  var hammeredGestureTarget = Hammer(gestureTarget[0]);
 
   // assign gesture events
   hammeredGestureTarget.on('swipeup', function() {
@@ -54,4 +54,4 @@ app.controller('GestureController', ['$scope', 'xbmcRemote', function($scope, xb
     letter.addClass('glow icon-up-circled2');
     xbmcRemote.contextMenu();
   });
-};
+}]);

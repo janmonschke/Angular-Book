@@ -21,8 +21,7 @@ app.factory('xbmcRemote', function($http, xbmcSettings) {
     console.log("action -> " + action);
     console.log("data -> " + (JSON.stringify(data)));
 
-    $httpProvider.defaults.headers.common.ContentType = 'application/json;charset=UTF-8';
-    var req = $http({method: 'POST', url: url, data: data}).
+    var req = $http({method: 'POST', url: url, data: data});
     
     req.success(function(a) {
       console.log('success');

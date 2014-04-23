@@ -43,7 +43,7 @@
                 <div class="second tab" ng-switch-when="1">
                     <div id="settings-form" ng-controller="SettingsController">
                         <p>Add your XBMC details here. Also make sure to enable the HTTP API in the settings screen of your device.</p>
-                        <form ng-change="save()">
+                        <form>
                             <input type="text" ng-model="settings.address" placeholder="XBMC address (IP/domain)" />
                             <input type="text" ng-model="settings.port" placeholder="Port (default: 8080)" />
                             <input type="text" ng-model="settings.username" placeholder="XBMC username (if set)" />
