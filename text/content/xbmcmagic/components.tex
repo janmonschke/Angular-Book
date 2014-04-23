@@ -38,7 +38,15 @@ The TabController takes care of switching the currently visible tab and consists
 
 \subsubsection{GestureController}
 
+The GestureController detects and interprets the user's swipe gestures. For this purpose it uses Hammer.js\footnote{\url{https://github.com/EightMedia/hammer.js}, last-checked on 22/04/2014}, a gesture-detection library, and the \code{xbmcRemote} service(see \refchapter{subsubsec:xbmcRemote}).
 
+\begin{lstlisting}[language=JavaScript, caption=GestureController mappings, label=lst:gesture-controller]
+  hammeredGestureTarget.on('swipeup', function() {
+    xbmcRemote.up();
+  });
+\end{lstlisting}
+
+\reflisting{lst:gesture-controller} \ demonstrates the binding between the \code{hammeredGestureTarget} (a hammer.js target) and the \code{xbmcRemote} service object. Each gesture is associated with one specific action. In this case, a \code{swipeup} would execute the \code{up} command in the XBMC media center, which is used for navigating between elements. Simple swipes e.g. are always used for visual navigation. Another example for gestures is the double tap, it executes the `back' command and navigates to the previous dialog.
 
 \subsubsection{CommandsController}
 
@@ -46,4 +54,5 @@ The TabController takes care of switching the currently visible tab and consists
 
 \subsection{Services}
 
-\subsubsection{SettingsController}
+\subsubsection{xbmcRemote}
+\label{subsubsec:xbmcRemote}
