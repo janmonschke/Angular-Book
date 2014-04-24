@@ -6,6 +6,7 @@ app.directive('card', function() {
     link: function(scope, element){
       // show the preview of the element
       scope.showPreview = function(){
+        if(!scope.hasEmbedContent()) return;
         var contentElement = element[0].querySelector('.item-content');
         contentElement.innerHTML = scope.item.embedlyContent.html;
       }

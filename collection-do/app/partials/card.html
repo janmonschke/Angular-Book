@@ -1,6 +1,6 @@
 <div class="item-content">
   <div class="playContainer" ng-if="hasImagePreview()" ng-click="showPreview()">
-    <span class="icon-play-circled play-overlay"></span>
+    <span class="icon-play-circled play-overlay" ng-if="hasEmbedContent()"></span>
     <img ng-src="{{ item.embedlyContent.thumbnail_url }}" class="preview-image" width="{{ baseWidth }}" height="{{ height() }}" />
   </div>
 

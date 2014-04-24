@@ -2,8 +2,14 @@ app.controller('CardController', ['$rootScope', '$scope', 'Item',
   function($rootScope, $scope, Item){
 
     $scope.hasImagePreview = function(){
-      var type = $scope.item.embedlyContent.type;
-      return (type == 'rich' || type == 'video');
+      var content = $scope.item.embedlyContent;
+      var type = content.type;
+      return (type == 'photo' || type == 'rich' || type == 'video' ||
+        (type == 'link' && content.provider_name == 'Flickr'));
+    };
+
+    $scope.hasEmbedContent = function(){
+      return ($scope.item.embedlyContent.html != undefined);
     };
 
     $scope.hasTextPreview = function(){
