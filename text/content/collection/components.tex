@@ -42,6 +42,17 @@ In this case, the \code{ng-repeat} directive uses a filtered set of elements. It
 
 A filter function is executed on every item in an array. When the filter function returns \code{false} for an item, it will be removed from the filtered set. It is kept in the set when the filter function returns \code{true}. In the \code{cardFilter} example, the card's \code{type} property is checked if it matches the scope's \code{filter} property (line 3). An empty \code{filter} (line 2) does not remove any card from the set. The \code{filter} property is set by using one of the four buttons on top of the card list (see \reffigure{fig:collection-directives}). After applying the \code{cardFilter}, the built-in \code{orderBy} filter is used to sort the cards by their creation dates (line 2, \reflisting{lst:cardlist-template}).
 
+For each individual card there is again a dedicated controller and a dedicated directive. There are four different kinds of cards in collection.do and all of them are handled in the same template file because all cards basically have the same look, but the content that is displayed in a card varies from type to type. 
+
+\begin{lstlisting}[language=HTML, caption=CardListController template, label=lst:card-template]
+<div ng-if="hasImagePreview()" ng-click="showPreview()">
+  <span ng-if="hasEmbedContent()">play</span>
+  <img ng-src="{{ item.embedlyContent.thumbnail_url }}" />
+</div>
+\end{lstlisting}
+
+The example shown in \reflisting{lst:card-template} demonstrates the usage of the \code{ng-if} directive that only shows a DOM element if the embedded expression returns \code{true} (line 1). Here, \code{ng-if} is used in combination with controller functions that check if the preview of the card contains certain properties such as an embeddable player (line 2). If an embeddable player is available for the element, the \code{showPreview()} method is used to replace the preview image with an interactive player when the play button is clicked (line 1f). The \code{showPreview} method is part of the directive, because it manipulates the element's DOM content.
+
 \subsection{Models}
 
 \subsection{Application bootstrap}
