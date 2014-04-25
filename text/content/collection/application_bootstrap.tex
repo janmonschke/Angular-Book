@@ -1,0 +1,28 @@
+%!TEX root = ../../thesis.tex
+\section{Application Bootstrap}
+
+Other than XBMCMagic, collection.do relies on URLs for navigating between collections. AngularJS does come with components to handle URL routing, but collection.do uses a section-based router called \code{ui-router} from the angular-ui project\footnote{\url{http://angular-ui.github.com/}, last checked-on 21/04/2014}. 
+
+\begin{lstlisting}[language=JavaScript, caption=collection.do router, label=lst:collection-router]
+  $stateProvider
+    .state('collection-content', {
+      url: "/:username/:collectionSlug",
+      views: {
+        "content": {
+          templateUrl: "cardlist.html",
+          controller: "CardListController"
+        },
+        "sidebar": { 
+          template: "sidebar.html",
+          controller: "SidebarController"
+        }
+      },
+      resolve: {
+        user_c: function(User){
+          return User.bySession();
+        }
+      }
+    })
+\end{lstlisting}
+
+\code{ui-router} requires a definition of states which represent a certain URL. The example in \reflisting{lst:collection-router} defines the state \code{collection-content} (line 2) which is mapped to the URL \code{/:username/:collectionSlug} (line 3). It is a common technique to use colons to define variables in strings, just as in the previous example. The URL points to a specific collection slug from a user which is represented by its \code{username}. When this URL is detected, the \code{resolve} property (line 14) is traversed and the promises are accumulated. In this case, the route is rendered when the user information has been loaded in line 16. This allows to specify a set of dependencies that need to be fetched before a route can be shown. When the promises are resolved, the specified views are rendered (line 4). The top-level properties \code{content} (line 5) and \code{sidebar} (line 9) specify regions in a DOM template, so that a fine-grained set of views can be rendered for every route. The definition in line 5 renders the \code{cardlist.html} template into the \code{content} region and associates the \code{CardListController}.

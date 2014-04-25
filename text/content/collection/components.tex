@@ -52,7 +52,3 @@ For each individual card there is again a dedicated controller and a dedicated d
 \end{lstlisting}
 
 The example shown in \reflisting{lst:card-template} demonstrates the usage of the \code{ng-if} directive that only shows a DOM element if the embedded expression returns \code{true} (line 1). Here, \code{ng-if} is used in combination with controller functions that check if the preview of the card contains certain properties such as an embeddable player (line 2). If an embeddable player is available for the element, the \code{showPreview()} method is used to replace the preview image with an interactive player when the play button is clicked (line 1f). The \code{showPreview} method is part of the directive, because it manipulates the element's DOM content.
-
-\subsection{Models}
-
-\subsection{Application bootstrap}
