@@ -5,4 +5,10 @@ The AngularJS team describe their framework as being ``HTML enhanced for web app
 
 At their core, applications written in AngularJS are constructed from \textbf{directives}, \textbf{controllers} (\refchapter{sect:directives_controllers}) and \textbf{services}(\refchapter{sect:services}). For display logic, AngularJS uses an own templating framework which in comparison to most other templating engines is not based on string-based operations and all interactive updates are executed in the DOM itself. This significantly minimizes render times and is more efficient. But on the other hand it also makes it hard to replace AngularJS's templating core with another implementation. Other frontend frameworks are less opinionated in this sense but AngularJS makes sure that all components work well together.
 
-AngularJS applications are initialized by 
+AngularJS applications are initialized by putting an \code{ng-app="appName"} attribute into a node of an HTML document. This node will then serve as the parent node of the application with the name \code{appName}. The application can then be referenced in the code:
+
+\begin{lstlisting}[language=JavaScript, caption=Initializing an AngularJS app, label=lst:angular-initialize]
+  var app = angular.module('appName', ['dependencies']);
+\end{lstlisting}
+
+\code{angular.module} accepts the application name and a list of third-party dependencies that need to be included into the application. The variable \code{app} is then used as a central point to create the application's custom components.
