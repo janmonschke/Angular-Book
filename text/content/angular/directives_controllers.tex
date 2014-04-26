@@ -4,7 +4,28 @@
 
 \textbf{Directives} are modules that either create completely new HTML elements with custom layout and functionality, or they can be used to add custom functionality to already existing HTML elements\footnote{\cite[p. 61ff]{lerner2013ngbook}}. If written in a granular way, directives can be reused in many places of an application, so that common functionality does not need to be rewritten. An example for a reused directive could be a \code{draggableDirective}, which adds custom drag and drop functionality to existing HTML elements. As a rule of thumb, directives should be used whenever there is the need for accessing DOM elements and their events.
 
-\todo{add directive example}
+Directives are declared in the \code{app's} namespace, using the \code{directive} method which accepts a name and a function that represents the directive, just as it is shown in \reflisting{lst:angular-directive}.
+
+\begin{lstlisting}[language=JavaScript, caption=A simple AngularJS directive, label=lst:angular-directive]
+  app.directive('foobar', function() {
+    return {
+      restrict: 'A',
+      templateUrl: 'foo.html',
+      controller: 'BarController',
+      link: function(scope, element, attributes){
+        scope.displayFoo = function(){
+          element[0].innerHTML = "<h1>foo</h1>";
+        }
+      }
+    }
+  });
+\end{lstlisting}
+
+\begin{lstlisting}[language=HTML, caption=A simple AngularJS directive (HTML), label=lst:angular-directive-html]
+  <div ng-click="displayFoo()" foobar>Bar</div>
+\end{lstlisting}
+
+The directive function needs to return an object which is then used to enhance the HTML element in the desired way. \reflisting{lst:angular-directive-html} shows an HTML element which has the attribute \code{foobar}. This attribute is used to trigger the creation of the directive which is shown in \reflisting{lst:angular-directive}. Directives can be triggered by attributes (A), element names (E) and by CSS classes (C). The \code{restrict} property (line 3) defines which of these is used as a trigger. A \code{restrict} property of \code{AC} would also trigger the directive from the element name: \code{<foobar></foobar>}. The \code{templateUrl} property (line 4) points to the template that should be inserted into the current element. The \code{controller} property associates a controller to the template if no controller has been specified in the template itself. \code{link} (line 6) defines the function that is used to access the DOM element and to associate it to the scope. In this example, the method \code{displayFoo} is added to the scope and it is executed when the \code{div} element is clicked (line 1, \reflisting{lst:angular-directive-html}). It accessess the element's \code{innerHTML} and adds the headline \code{foo} to it. Directives come in handy when external DOM libraries have to be used in addition to Angular or for DOM events that are not propagated through AngularJS itself. 
 
 \textbf{Controllers} are used to add logic to HTML templates or to directives\footnote{\cite[p. 25ff]{lerner2013ngbook}}. AngularJS comes with its own template engine that supports declarative definitions and declarative two-way bindings. It is best to show the connection of controllers and templates in a short example:
 
