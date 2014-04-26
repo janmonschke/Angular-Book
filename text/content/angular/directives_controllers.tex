@@ -1,7 +1,10 @@
 %!TEX root = ../../thesis.tex
 \section{Directives \& Controllers}
+\label{sect:directives_controllers}
 
 \textbf{Directives} are modules that either create completely new HTML elements with custom layout and functionality, or they can be used to add custom functionality to already existing HTML elements\footnote{\cite[p. 61ff]{lerner2013ngbook}}. If written in a granular way, directives can be reused in many places of an application, so that common functionality does not need to be rewritten. An example for a reused directive could be a \code{draggableDirective}, which adds custom drag and drop functionality to existing HTML elements. As a rule of thumb, directives should be used whenever there is the need for accessing DOM elements and their events.
+
+\todo{add directive example}
 
 \textbf{Controllers} are used to add logic to HTML templates or to directives\footnote{\cite[p. 25ff]{lerner2013ngbook}}. AngularJS comes with its own template engine that supports declarative definitions and declarative two-way bindings. It is best to show the connection of controllers and templates in a short example:
 

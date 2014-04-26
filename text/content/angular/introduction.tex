@@ -1,2 +1,8 @@
 %!TEX root = ../../thesis.tex
 \section{Introduction}
+
+The AngularJS team describe their framework as being ``HTML enhanced for web apps''\footnote{\url{https://angularjs.org/}, last-checked on 25/04/2014}. Its goal is to structure dynamic page updates in single page applications. It therefore provides frontend developers with a set of modules to organize their applications into separated, well-testable components. AngularJS was originally created by Mi\v{s}ko Hevery and is now being developed by a dedicated team at Google and together with the open source community. Hevery is famous his ``Clean Code Talks'' in which he is advocating test-driven development and dependency injection\footnote{\url{https://www.youtube.com/watch?v=RlfLCWKxHJ0}, last-checked on 24/04/2014}. When he then started to work on web projects, he wanted to port these patterns to frontend development and created AngularJS.
+
+At their core, applications written in AngularJS are constructed from \textbf{directives}, \textbf{controllers} (\refchapter{sect:directives_controllers}) and \textbf{services}(\refchapter{sect:services}). For display logic, AngularJS uses an own templating framework which in comparison to most other templating engines is not based on string-based operations and all interactive updates are executed in the DOM itself. This significantly minimizes render times and is more efficient. But on the other hand it also makes it hard to replace AngularJS's templating core with another implementation. Other frontend frameworks are less opinionated in this sense but AngularJS makes sure that all components work well together.
+
+AngularJS applications are initialized by 
