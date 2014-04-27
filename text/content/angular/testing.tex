@@ -1,0 +1,39 @@
+%!TEX root = ../../thesis.tex
+\section{Testing}
+
+AngularJS has been built to allow easy testing of all aspects of an application. The official documentation not only demonstrates how to use certain features in applications but it also provides examples of how to test these features. In this way, beginners are immediately taught to always write tests along with their application code. 
+
+There are two ways of testing that are embraced by the AngularJS team which are very well documented and supported: unit testing and end-to-end testing. Unit testing describes test scenarios that in which individual functions are tested in isolation. End-to-end testing tests the user interface of an application by remote controlling events on certain elements. In this way, the connection of controllers, directives and services is tested as a whole. \cite[chapter: Two types of tests in AngularJS (plus one more)]{niemla2013testing}
+
+\subsection{Unit Testing in AngularJS}
+
+Unit tests in AngularJS are executed using the Karma test runner\footnote{\url{http://karma-runner.github.io/}, last-checked on 23/04/2014}. Karma executes all tests in a real web browser environment which means that it starts an actual instance of a browser and executes the tests whenever they have been edited. The results of the tests are reported to a central server and can be inspected. An unlimited number of different web browsers can connect to the central test server so that it can be assured that the code works in different browsers as well.
+The tests are written in a behavior-driven way, using the Jasmine\footnote{\url{http://jasmine.github.io}, last-checked on 25/04/2014} test framework.
+
+\begin{lstlisting}[language=JavaScript, caption=Testing a service, label=lst:testing-service]
+  it('should add numbers correctly', inject(['AddService',
+    function(AddService){
+      var a = 3;
+      var b = 4;
+      var result = AddService.add(a, b);
+      expect(result).to.equal(7);
+    }
+  ]));
+\end{lstlisting}
+
+Every unit test is encapsulated in an \code{it()} function call, which accepts the description of the test and the test function itself. The \code{inject} call at the beginning of the test function is an AngularJS specific method which injects the \code{AddService} into the test scope, just like services are injected into normal AngularJS components. The example which is shown in \reflisting{lst:testing-service} test a simple service that should only add numbers. \code{expect} is a Jasmine function that accepts the expected result of an operation (in this case the result of the addition from the \code{AddService}) and checks if it equals the correct result. Jasmine comes with many additional methods that can check more than just equality of results. It also comes with spies and mocks that can be used to mimic behavior of real components. The angularJS documentation is really helpful when it comes to testing and provides examples for much more complex unit test scenarios\footnote{\url{https://docs.angularjs.org/tutorial/step_02}, last checked on 24/04/2014}.
+
+\subsection{End-to-end Testing in AngularJS}
+
+End-to-end tests in AngularJS are executed using a combination of Webdriver.JS\footnote{\url{https://code.google.com/p/chromedriver/}, a headless, scriptable version of Chrome.} and Protractor\footnote{\url{https://github.com/angular/protractor}, an end-to-end testing framework.} \cite[chapter: E2E testing]{vermeersch2014}. As said before, end-to-end tests are used to test the combination of controllers, directives and services on a real website. Therefore, the website is loaded in a browser context and a set of user interactions is simulated in this web browser. Afterwards, the result of these actions are then observed and it is checked if they meet the expected results. This is done using a similar syntax as in the unit tests.
+
+\begin{lstlisting}[language=JavaScript, caption=Ent-to-end testing in AngularJS, label=lst:testing-e2e]
+  it('Clicking the button changes its text', function () {
+    browser.get('index.html');
+    var button = by.id('test-button');
+    element(button).click();
+    expect(button).getText().toBe('le text');
+  });
+\end{lstlisting}
+
+Again, the text is encapsulated into an \code{it()} call. This time it is important to test a specific site that first has to be loaded by the underlying browser. \code{browser.get()} makes the browser load and interpret the specified URL. After that, Protractor offers a variety of selectors for elements e.g. to select elements by controllers or by models. This example uses a simple id-selector to find a specific button. The selected element can then be used to simulate user interactions. In this case, the button is simply clicked using the \code{element} wrapper and its \code{click} method. The \code{expect} method can again be used to check if the test meets a specified behavior. Here, the button's text should have changed to \code{le text}. 
