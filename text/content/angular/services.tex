@@ -21,3 +21,13 @@ Services are components in AngularJS applications that provide additional logic 
 
 The service requires \code{\$http} and \code{\$q} in its parameter declaration which itself are services that are defined by AngularJS. As briefly mentioned before, AngularJS will inserted these service using dependency injection. The internal AngularJS module \code{\$injector} takes care of reading parameter declarations and looking up the services. It will then inject the looked up services into the function to make them available in its scope. Dependency injection is a powerful method to drastically simplify testing, because it forces developers to declare a list of dependencies, which itself is a good help to understand the text more. And it also makes it really easy to mock dependencies in testing environments.
 
+\begin{lstlisting}[language=JavaScript, caption=A simple AngularJS service, label=lst:angular-service-example]
+  app.controller('FooController', function($scope, User){
+    $scope.loading = true;
+    User.bySession().then(function(userObj){
+      $scope.loading = false;
+    });
+  });
+\end{lstlisting}
+
+In \reflisting{lst:angular-service-example}, the \code{User} service (line 1) is injected alongside with the \code{\$scope} service. The example controller (\code{FooController}) is in a \code{loading} state (line 2) initially and then waits for the User service to fetch the current user from the session. It then stops the loading state and the UI can react to it.
