@@ -1,0 +1,25 @@
+{
+   "_id": "_design/swm",
+   "_rev": "12-ad807a5eadf8b7733fad96d314796cfc",
+   "language": "javascript",
+   "views": {
+       "collectionsByOwnerId": {
+           "map": "function(doc) {\n  if (doc.type && doc.type === 'collection' && doc.owners) {\n    doc.owners.forEach(function(owner){\n      emit(owner, doc);\n    })\n    \n  }\n}"
+       },
+       "collectionsByOwnerIdAndName": {
+           "map": "function(doc) {\n  if(doc.type && doc.type == 'collection' && doc.owners)\n    doc.owners.forEach(function(owner){\n      emit([owner, doc.name], doc);\n    })\n}"
+       },
+       "itemsByCollectionId": {
+           "map": "function(doc) {\n  if (doc.type && doc.type === 'item') {\n    emit(doc.collection_id, doc);\n  }\n}"
+       },
+       "collectionsByOwnerIdAndSlug": {
+           "map": "function(doc) {\n  if(doc.type && doc.type == 'collection' && doc.owners)\n    doc.owners.forEach(function(owner){\n      emit([owner, doc.slug], doc);\n    })\n}"
+       }
+   },
+   "lists": {
+   },
+   "shows": {
+   },
+   "filters": {
+   }
+}

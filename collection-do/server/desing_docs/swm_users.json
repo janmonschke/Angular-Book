@@ -1,0 +1,12 @@
+{
+   "_id": "_design/users",
+   "language": "javascript",
+   "views": {
+       "usersByName": {
+           "map": "function(doc) {\n  emit(doc.username, doc);\n}"
+       },
+       "usersByServiceId": {
+           "map": "function(doc) {\n  if(doc.service_userid)\n    emit(doc.service_userid, doc);\n}"
+       }
+   }
+}
